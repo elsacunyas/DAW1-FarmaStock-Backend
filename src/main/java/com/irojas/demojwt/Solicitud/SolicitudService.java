@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.irojas.demojwt.Proveedor.Proveedor;
+
 
 @Service
 public class SolicitudService {
@@ -15,14 +15,16 @@ public class SolicitudService {
 	private ISolicitudRepository reposoli;
 	
 	public Solicitud gabarSolicitud(Solicitud s) {
-		
 		return reposoli.save(s);
 		
 	}
 	
-	public List<Solicitud>listarSolicitud(){
-		
+	public List<Solicitud> listarSolicitud(){
 		return reposoli.findAll();
+	}
+	
+	public Solicitud obtenerSolicitud(int id) {
+		return reposoli.findById(id).get();
 	}
 
 }

@@ -25,8 +25,13 @@ public class ProveedorController {
 	private ProveedorService servicio;
 	
 	@GetMapping
-	public ResponseEntity<List<Proveedor> > listarProveedor(){
-		return ResponseEntity.ok(servicio.listarPorveedor());
+	public ResponseEntity<List<Proveedor> > listarProveedor(@RequestParam(required = false) String name){
+		if (name != null) {
+			return ResponseEntity.ok(servicio.buscarProveedor(name));
+		} else {
+			return ResponseEntity.ok(servicio.listarPorveedor());
+		}
+		
 	}
 	
 	@GetMapping("/{id}")
@@ -34,11 +39,7 @@ public class ProveedorController {
 		
 		return ResponseEntity.ok(servicio.obtenerProveedor(id));
 	}
-	@GetMapping("/buscar")
-	public ResponseEntity<List<Proveedor>>  buscarProveedor(@RequestParam String name) {
-		
-		return ResponseEntity.ok(servicio.buscarProveedor(name));
-	}
+	
 	
 	@PostMapping
 	public ResponseEntity<Proveedor> crearProveedor(@RequestBody Proveedor p) {
